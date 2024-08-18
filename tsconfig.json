@@ -43,8 +43,8 @@
 		"outDir": "./out",
 		//"outFile": "bundle.js",
 		//"outDir": ".",
-		"rootDir": "ts",//限定 TypeScript 编译器的搜索范围。若不設潙./src則${out}下還會有一個src目錄
-		"baseUrl": "ts",//用于解析模块导入路径的基础路径
+		"rootDir": "./ts",//限定 TypeScript 编译器的搜索范围。若不設潙./src則${out}下還會有一個src目錄
+		"baseUrl": "./ts",//用于解析模块导入路径的基础路径
 		"paths": {
 			"@root/*": ["../*"],
 			//"*":["src/shared/*"],
@@ -57,7 +57,7 @@
 	"allowSyntheticDefaultImports": true,
 	//"include": ["frontend/**/*.ts", "frontend/**/*.d.ts", "frontend/**/*.tsx", "frontend/**/*.vue"],
 	"exclude": [
-		"ts/frontend/*"
+		//"ts/frontend/*"
 	],
 	//include下之文件皆當在${rootDir}/*下
 	"include": [
