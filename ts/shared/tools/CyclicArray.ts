@@ -6,7 +6,7 @@
  */
 
 /**
- * 2024-08-03T16:17:11.205+08:00
+ * 2024-08-19T19:34:45.838+08:00
  */
 export default class CyclicArray<T>{
 	protected constructor(){
@@ -142,7 +142,7 @@ export default class CyclicArray<T>{
 		return true
 	}
 
-	removeBack(){
+	rmBack(){
 		if(this.isEmpty()){
 			return void 0
 		}
@@ -184,7 +184,7 @@ export default class CyclicArray<T>{
 		if(z.addBack(ele)){ //成功
 			return
 		}
-		const front = z.removeFront()
+		const front = z.rmFront()
 		z.addBack(ele)
 		return front
 	}
@@ -200,7 +200,7 @@ export default class CyclicArray<T>{
 		if(z.addFront(ele)){ //成功
 			return
 		}
-		const back = z.removeBack()
+		const back = z.rmBack()
 		z.addFront(ele)
 		return back
 	}
@@ -276,7 +276,7 @@ export default class CyclicArray<T>{
 		return index
 	}
 
-	removeFront(){
+	rmFront(){
 		if(this.isEmpty()){
 			return void 0
 		}
