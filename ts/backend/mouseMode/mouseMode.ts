@@ -1,4 +1,4 @@
-import type { I_handleKey } from '@shared/interfaces/I_handleKey';
+import type { I_handleKeyEvent } from '@shared/interfaces/I_handleKeyEvent';
 import type { I_KeyEvent } from '@shared/interfaces/I_KeyEvent';
 import type { I_Mouse } from '@shared/interfaces/I_Mouse';
 import CyclicArray from '@shared/tools/CyclicArray';
@@ -48,7 +48,7 @@ class Status{
 }
 
 
-export class MouseMode implements I_handleKey {
+export class MouseMode implements I_handleKeyEvent {
 	constructor(){}
 	protected __init__(...args: Parameters<typeof MouseMode.new>){
 		const z = this
@@ -71,7 +71,7 @@ export class MouseMode implements I_handleKey {
 	get status(){return this._status}
 	set status(v){this._status = v}
 
-	handleKey(event: I_KeyEvent) {
+	handleKeyEvent(event: I_KeyEvent) {
 		const z = this
 		z.status.history.addBackF(event)
 		if(event.key === keys.J){

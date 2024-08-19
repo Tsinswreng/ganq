@@ -15,7 +15,7 @@ export async function Main_mouseMode(){
 				console.warn("unknown key event:", event);
 				return;
 			}
-			mouseMode.handleKey(keyEvent);
+			mouseMode.handleKeyEvent(keyEvent);
 		} catch (err) {
 			console.error(err)
 		}
