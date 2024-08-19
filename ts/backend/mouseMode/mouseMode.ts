@@ -1,9 +1,12 @@
-import rb from 'robotjs';
-import { GlobalKeyboardListener } from "node-global-key-listener";const gkl = new GlobalKeyboardListener();
-const robot = rb;
-import { I_handleKey } from '@shared/interfaces/I_handleKey';
-import { I_KeyEvent } from '@shared/interfaces/I_KeyEvent';
+import type { I_handleKey } from '@shared/interfaces/I_handleKey';
+import type { I_KeyEvent } from '@shared/interfaces/I_KeyEvent';
+import type { I_Mouse } from '@shared/interfaces/I_Mouse';
 import CyclicArray from '@shared/tools/CyclicArray';
+import { Mouse } from '@backend/impl/Mouse';
+import { mouse } from '@backend/impl/Mouse';
+import { keys } from '@shared/impl/Keys';
+import { Direct2d } from '@shared/enum/Direct2d';
+
 // gkl.addListener((event) => {
 // 	if(event.name === 'J'){
 // 		// 定义要移动的长度
@@ -38,6 +41,10 @@ class Status{
 
 	//get This(){return Status}
 	history = CyclicArray.new<I_KeyEvent>(16)
+	shiftDown = false
+	ctrlDown = false
+	altDown = false
+	metaDown = false
 }
 
 
@@ -54,6 +61,11 @@ export class MouseMode implements I_handleKey {
 		return z
 	}
 
+	_mouse:I_Mouse = mouse
+	get mouse(){return this._mouse}
+	set mouse(v){this._mouse = v}
+	
+
 	//get This(){return MouseMode}
 	_status = Status.new()
 	get status(){return this._status}
@@ -62,8 +74,8 @@ export class MouseMode implements I_handleKey {
 	handleKey(event: I_KeyEvent) {
 		const z = this
 		z.status.history.addBackF(event)
+		if(event.key === keys.J){
+			z.mouse.Move(Direct2d.left, 100)
+		}
 	}
 }
-
-
-
