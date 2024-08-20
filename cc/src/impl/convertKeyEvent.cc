@@ -18,7 +18,7 @@ i32 convertKeyEvent(
 // > 將 lParam 轉換為 KBDLLHOOKSTRUCT 結構的指針，這個結構包含了有關鍵盤事件的詳細信息，例如按下的鍵碼。
 		KBDLLHOOKSTRUCT* pKeyboard = (KBDLLHOOKSTRUCT*)lParam;
 		// 檢查是否按下 某 鍵
-		auto key = code__key[pKeyboard->vkCode];
+		auto& key = code__key[pKeyboard->vkCode];
 		if(key == nullptr){
 			std::cerr << "Unknown key code: " << pKeyboard->vkCode << std::endl;
 			return -1;
