@@ -8,13 +8,13 @@ namespace ngaq {
 
 class KeyEvent : public I_KeyEvent {
 public:
-	KeyEvent(){}
-	KeyEvent(an<I_Key> key, KeyState state) : _key(key), _state(state) {}
-	an<I_Key> key_() override { return _key; }
+	//KeyEvent(){}
+	KeyEvent(I_Key& key, KeyState state) : _key(key), _state(state) {}
+	I_Key& key_() override { return _key; }
 	KeyState state_() override { return _state; }
 
 protected:
-	an<I_Key> _key;
+	I_Key& _key;
 	KeyState _state;
 };
 

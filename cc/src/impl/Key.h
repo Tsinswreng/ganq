@@ -7,7 +7,7 @@ class Key : public I_Key{
 public:
 	Key(const string& name, i32 code)
 		:_name(name), _code(code){};
-	virtual ~Key();
+	~Key(){};
 
 	string name_(){ return _name; }
 	i32 code_(){ return _code; }
