@@ -2,7 +2,7 @@
 
 //In included file: target of using declaration conflicts with declaration already in scopeclang(using_decl_conflict)
 #include <memory>
-
+#include <optional>
 #include <functional>
 #include <list>
 #include <map>
@@ -56,7 +56,15 @@ using f64 = double;
 using string = std::string;
 
 template <class T>
-using vec = std::vector<T>;
+using Vec = std::vector<T>;
+
+template <class T>
+using Opt = std::optional<T>;
+
+template <class K, class V>
+using UMap = std::unordered_map<K, V>;
+
+
 
 // template <typename... Args>
 // auto mkuq(Args&&... args) -> decltype(std::make_unique(std::forward<Args>(args)...)) {

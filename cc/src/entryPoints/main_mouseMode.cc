@@ -1,12 +1,21 @@
 #include "common.h"
 #include <windows.h>
 #include <iostream>
+#include "enum/KeyEventResult.h"
+#include "impl/KeyEvent.h"
 #include "impl/Mouse.h"
 #include "IF/I_Mouse.h"
+#include "mouseMode/MouseMode.h"
+#include "impl/convertKeyEvent.h"
 
+
+namespace ngaq {
+
+MouseMode mouseMode;
 
 //定義在最頂層（即在所有函數外部）且不加 static 修飾符，該變量就是整個程序的全局變量。
 HHOOK hKeyboardHook;
+
 
 // 鍵盤鉤子回調函數 CALLBACK潙宏 __stdcall
 LRESULT CALLBACK KeyboardHookProc(
@@ -14,31 +23,21 @@ LRESULT CALLBACK KeyboardHookProc(
 	, WPARAM wParam // 按下按鍵的 wParam 值 在鍵盤鉤子中，它通常表示按鍵的狀態（按下或釋放）。
 	, LPARAM lParam // 該結構包含有關鍵盤事件的詳細信息。
 ) {
-	if (nCode == HC_ACTION) { // 若潙鍵盤事件
-// > 將 lParam 轉換為 KBDLLHOOKSTRUCT 結構的指針，這個結構包含了有關鍵盤事件的詳細信息，例如按下的鍵碼。
-		KBDLLHOOKSTRUCT* pKeyboard = (KBDLLHOOKSTRUCT*)lParam;
 
-		// 檢查是否按下 某 鍵
-		if (pKeyboard->vkCode == VK_F11) {
-			std::cout << "F12 key pressed. Blocking the event." << std::endl;
-			return 1; // 返回 1 以攔截該事件
-		} else {
-			if(wParam == WM_KEYDOWN){
-				std::cout << "key down: " << pKeyboard->vkCode << std::endl;
-			}else if(wParam == WM_KEYUP){
-				std::cout << "key up: " << pKeyboard->vkCode << std::endl;
-			}
-			
-			// println(pKeyboard->scanCode);
-			// println(pKeyboard->flags);
-			// println(pKeyboard->time);
-			// println(pKeyboard->dwExtraInfo);
-		}
+	KeyEvent keyEvent;
+	if(convertKeyEvent(keyEvent, nCode, wParam, lParam) != 0){
+		return CallNextHookEx(hKeyboardHook, nCode, wParam, lParam);
+	}
+	auto pr =  mouseMode.handleKeyEvent(keyEvent);
+	if(pr == KeyEventResult::kNoop){
+		return CallNextHookEx(hKeyboardHook, nCode, wParam, lParam);
+	}else if(pr == KeyEventResult::kAccepted){
+		return 1;
 	}
 	return CallNextHookEx(hKeyboardHook, nCode, wParam, lParam);
 }
 
-int main() {
+int main_mouseMode() {
 // 設置鍵盤鉤子
 	hKeyboardHook = SetWindowsHookEx(
 //> 鉤子類型常量，表示設置一個低級鍵盤鉤子（Low-Level Keyboard Hook）。低級鉤子允許你監控鍵盤事件，無論是系統還是其他應用程序的鍵盤事件。這意味著你可以捕獲所有鍵盤輸入，包括系統熱鍵。
@@ -77,3 +76,6 @@ int main() {
 	UnhookWindowsHookEx(hKeyboardHook);
 	return 0;
 }
+
+
+}//~namespace ngaq

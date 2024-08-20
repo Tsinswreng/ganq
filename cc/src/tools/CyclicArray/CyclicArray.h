@@ -35,12 +35,13 @@ public:
 		return _size == _capacity;
 	}
 
-	void clear() override {
+	i32 clear() override {
 		_data.clear();
 		_data.resize(_capacity);
 		_size = 0;
 		_frontI = 0;
 		_backI = 0;
+		return 0;
 	}
 
 	static i32 posAdd(i32 index, i32 capacity, i32 num) {
@@ -155,23 +156,21 @@ public:
 		_backI = _size - 1;
 	}
 
-	std::function<std::optional<T>(i32)> frontIterFn() override {
-		return [this](i32 cnt) {
-			if (cnt < 0 || cnt >= _size) {
-				return std::nullopt;
-			}
-			return frontGet(cnt);
-		};
-	}
+	// std::function<std::optional<T>(i32)> frontIterFn() override {
+	// 	i32 i = 0;
+	// 	return [this](i32 cnt=1) {
+	// 		auto ans = frontGet(cnt);
+	// 	};
+	// }
 
-	std::function<std::optional<T>(i32)> backIterFn() override {
-		return [this](i32 cnt) {
-			if (cnt < 0 || cnt >= _size) {
-				return std::nullopt;
-			}
-			return backGet(cnt);
-		};
-	}
+	// std::function<std::optional<T>(i32)> backIterFn() override {
+	// 	return [this](i32 cnt) {
+	// 		if (cnt < 0 || cnt >= _size) {
+	// 			return std::nullopt;
+	// 		}
+	// 		return backGet(cnt);
+	// 	};
+	// }
 
 	std::vector<T> toVector() override {
 		std::vector<T> result;

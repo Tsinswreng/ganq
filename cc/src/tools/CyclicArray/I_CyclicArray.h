@@ -33,7 +33,8 @@ public:
 	virtual T frontGet(i32 pos)=0;
 	virtual void frontSet(i32 num, T ele)=0;
 	virtual void capacityAdd(i32 add)=0;
-	virtual std::function<i32(i32)> frontIterFn()=0;
-	virtual std::function<i32(i32)> backIterFn()=0;
 	virtual std::vector<T> toVector()=0;
+	// virtual std::function<i32(i32)> frontIterFn()=0;
+	// virtual std::function<i32(i32)> backIterFn()=0;
+	
 };
