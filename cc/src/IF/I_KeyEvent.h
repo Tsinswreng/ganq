@@ -6,7 +6,7 @@ namespace ngaq {
 
 class I_KeyEvent {
 public:
-	virtual I_Key& key_() = 0;
+	virtual an<I_Key> key_() = 0;
 	virtual KeyState state_() = 0;
 };
 

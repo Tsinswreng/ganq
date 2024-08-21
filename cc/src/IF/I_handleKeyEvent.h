@@ -6,7 +6,7 @@ namespace ngaq {
 
 class I_handleKeyEvent {
 public:
-	virtual KeyEventResult handleKeyEvent(I_KeyEvent& keyEvent) = 0;
+	virtual KeyEventResult handleKeyEvent(an<I_KeyEvent> keyEvent) = 0;
 };
 
 }//~namespace ngaq

@@ -85,6 +85,7 @@ public:
 	Kt Ctrl_R = KEY("Ctrl_R", 163);
 	Kt Alt_L = KEY("Alt_L", 164);
 	Kt Alt_R = KEY("Alt_R", 165);
+	Kt Meta_L = KEY("Meta_L", 91);
 	Kt Pause = KEY("Pause", 19);
 	Kt CapsLock = KEY("CapsLock", 20);
 	Kt Esc = KEY("Esc", 27);

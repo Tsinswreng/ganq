@@ -36,6 +36,31 @@ i32 Mouse::move(Direct2d direct, i32 distance) {
 	return 0;
 }
 
+i32 Mouse::move_hv(i32 horiz, i32 vert) {
+	POINT p;
+	GetCursorPos(&p);
+
+	// 更新鼠標位置
+	p.x += horiz;
+	p.y += vert;
+
+	SetCursorPos(p.x, p.y);
+	return 0;
+}
+
+i32 Mouse::scroll_hv(i32 horiz, i32 vert) {
+	// 垂直滾動
+	if (vert != 0) {
+		mouse_event(MOUSEEVENTF_WHEEL, 0, 0, vert, 0);
+	}
+	// 水平滾動
+	if (horiz != 0) {
+		mouse_event(MOUSEEVENTF_HWHEEL, 0, 0, horiz, 0);
+	}
+	return 0;
+}
+
+
 i32 Mouse::curPos(I_Coord2d_i32& ans) {
 	POINT p;
 	GetCursorPos(&p);
@@ -58,5 +83,7 @@ i32 Mouse::click(MouseClick key) {
 	mouse_event(button | MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 	return 0;
 }
+
+
 
 } // namespace ngaq

@@ -4,32 +4,58 @@
 #include "IF/I_handleKeyEvent.h"
 #include "enum/KeyEventResult.h"
 #include "enum/KeyState.h"
+#include "impl/KeyEvent.h"
 #include "impl/Mouse.h"
 #include "impl/Keys.h"
-#include "enum/Direct2d.h"
+#include "./Status.h"
+
 namespace ngaq {
+
+
+namespace {
+	//using KeyEvent::isKeyDown;
+}
 
 class MouseMode : public I_handleKeyEvent{
 
 protected:
 	Mouse mouse;
 	Keys keys = Keys::inst();
-
+	an<Status> _status = mkuq<Status>();
 public:
-	KeyEventResult handleKeyEvent(I_KeyEvent& key){
+	an<Status> status_(){return _status;}
+	//void status_(Status v){_status = v;}
+
+
+	KeyEventResult handleKeyEvent(an<I_KeyEvent> key){
 		println("_____");
 		println("key: ", &key);
-		println("name: ", key.key_().name_());
+		println("name: ", key->key_()->name_());
 		println( "state: ",
-			static_cast<i32>(key.state_())
+			static_cast<i32>(key->state_())
 		);
 		//println(keyEvent.state_());
 		if(
-			key.key_().code_() == keys.J->code_()
-			&& key.state_() == KeyState::down
+			!KeyEvent::isKeyUp(*key, *keys.Alt_R)
 		){
-			mouse.move(Direct2d::left, 50);
+			if(status_()->isMouseMode_()){
+				status_()->isMouseMode_(false);
+			}else{
+				status_()->isMouseMode_(true);
+			}
 		}
+
+		if(!status_()->isMouseMode_()){
+			return KeyEventResult::kNoop;
+		}
+
+		if(
+			KeyEvent::isKeyDown(*key, *keys.J)
+		){
+			mouse.move_hv(-50, 0);
+		}
+
+
 		return KeyEventResult::kNoop;
 	}
 

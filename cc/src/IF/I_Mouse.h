@@ -18,6 +18,8 @@ public:
 	virtual i32 moveTo(i32 x, i32 y) = 0;
 	/** @deprecated */
 	virtual i32 move(Direct2d direct, i32 distance) = 0;
+	virtual i32 move_hv(i32 horiz, i32 vert) = 0;
+	virtual i32 scroll_hv(i32 horiz, i32 vert) = 0;
 	virtual i32 curPos(Coord2d& ans) = 0;
 	virtual i32 click() = 0;
 	virtual i32 click(MouseClick key) = 0;

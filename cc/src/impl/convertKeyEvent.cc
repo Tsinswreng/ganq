@@ -18,7 +18,7 @@ i32 convertKeyEvent(
 // > 將 lParam 轉換為 KBDLLHOOKSTRUCT 結構的指針，這個結構包含了有關鍵盤事件的詳細信息，例如按下的鍵碼。
 		KBDLLHOOKSTRUCT* pKeyboard = (KBDLLHOOKSTRUCT*)lParam;
 		// 檢查是否按下 某 鍵
-		auto& key = code__key[pKeyboard->vkCode];
+		auto key = code__key[pKeyboard->vkCode];
 		if(key == nullptr){
 			std::cerr << "Unknown key code: " << pKeyboard->vkCode << std::endl;
 			return -1;
@@ -29,12 +29,14 @@ i32 convertKeyEvent(
 			keyState = KeyState::down;
 		}else if(wParam == WM_KEYUP){
 			keyState = KeyState::up;
+		}else{
+			std::cerr << "Unknown key event: " << wParam << std::endl;
 		}
 // Object of type 'KeyEvent' cannot be assigned because its copy assignment operator is implicitly deleted clang(ovl_deleted_special_oper)
 //KeyEvent.h(17, 9): Copy assignment operator of 'KeyEvent' is implicitly deleted because field '_key' is of reference type 'I_Key &'
 		// auto keyEvent = mkuq<KeyEvent>(*key, keyState);
 		// ans = mv(keyEvent);
-		ans = New<KeyEvent>(*key, keyState);
+		ans = New<KeyEvent>(key, keyState);
 		//ans = mv(New<KeyEvent>(*key, keyState));
 		return 0;
 	}

@@ -83,11 +83,19 @@ using UMap = std::unordered_map<K, V>;
 
 /**
  * 智能指針Y轉X
+ * As<X>(Y)
  */
 template <class X, class Y>
 inline an<X> As(const an<Y>& ptr) {
 	return std::dynamic_pointer_cast<X>(ptr);
 }
+
+
+template <class X, class Y>
+inline an<X> As_s(const an<Y>& ptr) {
+	return std::static_pointer_cast<X>(ptr);
+}
+
 
 template <class X, class Y>
 inline bool Is(const an<Y>& ptr) {

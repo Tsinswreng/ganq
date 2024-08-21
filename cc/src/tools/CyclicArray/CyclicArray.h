@@ -147,6 +147,7 @@ public:
 			throw std::invalid_argument("Cannot decrease capacity");
 		}
 		std::vector<T> newData(_capacity + add);
+		//std::vector<T> newData();
 		for (i32 i = 0; i < _size; ++i) {
 			newData[i] = frontGet(i);
 		}

@@ -74,6 +74,7 @@ protected:
 		M[55] = KEY(K._7);
 		M[56] = KEY(K._8);
 		M[57] = KEY(K._9);
+		M[91] = KEY(K.Meta_L);
 		M[112] = KEY(K.F1);
 		M[113] = KEY(K.F2);
 		M[114] = KEY(K.F3);

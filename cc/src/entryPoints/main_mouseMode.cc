@@ -27,7 +27,7 @@ LRESULT CALLBACK KeyboardHookProc(
 	if(convertKeyEvent(keyEvent , nCode, wParam, lParam) != 0){
 		return CallNextHookEx(hKeyboardHook, nCode, wParam, lParam);
 	}
-	auto pr =  mouseMode.handleKeyEvent(*keyEvent);
+	auto pr =  mouseMode.handleKeyEvent(keyEvent);
 	if(pr == KeyEventResult::kNoop){
 		return CallNextHookEx(hKeyboardHook, nCode, wParam, lParam);
 	}else if(pr == KeyEventResult::kAccepted){
