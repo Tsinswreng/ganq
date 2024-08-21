@@ -36,27 +36,40 @@ public:
 		);
 		//println(keyEvent.state_());
 		if(
-			!KeyEvent::isKeyUp(*key, *keys.Alt_R)
+			!KeyEvent::isKeyUp(*key, *keys.F1)
 		){
 			if(status_()->isMouseMode_()){
 				status_()->isMouseMode_(false);
 			}else{
 				status_()->isMouseMode_(true);
 			}
+			//return KeyEventResult::kAccepted;
 		}
 
 		if(!status_()->isMouseMode_()){
 			return KeyEventResult::kNoop;
 		}
 
-		if(
-			KeyEvent::isKeyDown(*key, *keys.J)
-		){
+		if( KeyEvent::isKeyDown(*key, *keys.J) ){
 			mouse.move_hv(-50, 0);
+			return KeyEventResult::kAccepted;
 		}
 
+		if( KeyEvent::isKeyDown(*key, *keys.K) ){
+			mouse.move_hv(0, 50);
+			return KeyEventResult::kAccepted;
+		}
 
-		return KeyEventResult::kNoop;
+		if( KeyEvent::isKeyDown(*key, *keys.L) ){
+			mouse.move_hv(0, -50);
+			return KeyEventResult::kAccepted;
+		}
+
+		if( KeyEvent::isKeyDown(*key, *keys.Semicolon) ){
+			mouse.move_hv(50, 0);
+			return KeyEventResult::kAccepted;
+		}
+		return KeyEventResult::kAccepted;
 	}
 
 };

@@ -4,8 +4,11 @@
 #include "impl/Code__Key.h"
 #include "enum/KeyState.h"
 #include <iostream>
+#include "tools/AnsiColors.h"
 
 namespace ngaq {
+
+static auto& AC = AnsiColors::inst();
 
 i32 convertKeyEvent(
 	_Out_ an<KeyEvent>& ans // 傳回的 KeyEvent 物件
@@ -20,7 +23,8 @@ i32 convertKeyEvent(
 		// 檢查是否按下 某 鍵
 		auto key = code__key[pKeyboard->vkCode];
 		if(key == nullptr){
-			std::cerr << "Unknown key code: " << pKeyboard->vkCode << std::endl;
+			//std::cerr <<AC.Yellow, "Unknown key code: " << pKeyboard->vkCode << std::endl;
+			println(AC.Yellow, "Unknown key code: ", pKeyboard->vkCode, AC.Reset);
 			return -1;
 		}
 		//KeyEvent a();
@@ -30,7 +34,8 @@ i32 convertKeyEvent(
 		}else if(wParam == WM_KEYUP){
 			keyState = KeyState::up;
 		}else{
-			std::cerr << "Unknown key event: " << wParam << std::endl;
+			println(AC.Yellow, "Unknown key event: ", wParam, AC.Reset);
+			//std::cerr << "Unknown key event: " << wParam << std::endl;
 		}
 // Object of type 'KeyEvent' cannot be assigned because its copy assignment operator is implicitly deleted clang(ovl_deleted_special_oper)
 //KeyEvent.h(17, 9): Copy assignment operator of 'KeyEvent' is implicitly deleted because field '_key' is of reference type 'I_Key &'

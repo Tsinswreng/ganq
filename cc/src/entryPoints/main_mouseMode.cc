@@ -11,6 +11,8 @@
 
 namespace ngaq {
 
+
+
 MouseMode mouseMode;
 
 //定義在最頂層（即在所有函數外部）且不加 static 修飾符，該變量就是整個程序的全局變量。
@@ -25,6 +27,7 @@ LRESULT CALLBACK KeyboardHookProc(
 ) {
 	an<KeyEvent> keyEvent;
 	if(convertKeyEvent(keyEvent , nCode, wParam, lParam) != 0){
+		//std::cerr << "Failed to convert key event!" << std::endl;
 		return CallNextHookEx(hKeyboardHook, nCode, wParam, lParam);
 	}
 	auto pr =  mouseMode.handleKeyEvent(keyEvent);
