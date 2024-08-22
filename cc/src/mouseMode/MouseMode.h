@@ -19,7 +19,7 @@ namespace MouseMode{
 	//using KeyEvent::isKeyDown;
 	using namespace _;	
 	using Kt = an<I_KeyEvent>;
-	using Fn_t = Fun<Opt<KeyEventResult>(Kt)>;
+	using Fn_t = Fun<Opt<KeyEventResult>()>;
 }
 
 namespace _ {
@@ -29,17 +29,28 @@ class MouseMode : public I_handleKeyEvent{
 protected:
 	UMap<i32, ::MouseMode::Fn_t> keyCode__fn;
 	void _init_keyCode__fn(){
-		keyCode__fn[keys.W->code_()] = [this](an<I_KeyEvent> key)->Opt<KeyEventResult>{
-			_mouse.click();
+		keyCode__fn[keys.W->code_()] = [this]()->Opt<KeyEventResult>{
+			if(_curKey->state_() == KeyState::down){
+				_mouse.click(MouseClick::left, KeyState::down);
+			}else{
+				_mouse.click(MouseClick::left, KeyState::up);
+			}
+			
 			return KeyEventResult::kAccepted;
 		};
 
-		keyCode__fn[keys.E->code_()] = [this](an<I_KeyEvent> key)->Opt<KeyEventResult>{
-			_mouse.click(MouseClick::right);
+		keyCode__fn[keys.E->code_()] = [this]()->Opt<KeyEventResult>{
+			if(_curKey->state_() == KeyState::down){
+				_mouse.click(MouseClick::right, KeyState::down);
+			}else{
+				_mouse.click(MouseClick::right, KeyState::up);
+			}
 			return KeyEventResult::kAccepted;
 		};
 
 	}
+
+	::MouseMode::Kt _curKey;
 	MouseModeOpt& _opt = MouseModeOpt::inst();
 	Mouse _mouse;
 	Keys keys = Keys::inst();
@@ -76,6 +87,7 @@ public:
 
 	KeyEventResult handleKeyEvent(an<I_KeyEvent> key){
 		//println(0);
+		_curKey = key;
 		_updStatus(key);
 		//println(1);// -
 		if(status_()->isShiftDown_()){
@@ -95,11 +107,11 @@ public:
 		);
 		println(AC.Cyan, "mouseMode: ", status_()->isMouseMode_(), AC.Reset);
 		//println(keyEvent.state_());
-
+		
 		auto it = keyCode__fn.find(key->key_()->code_());
 		
 		if(it != keyCode__fn.end()){ // 判斷是否有對應的函式
-			auto resl = it->second(key);
+			auto resl = it->second();
 			if(resl != nullopt){
 				return resl.value();
 			}

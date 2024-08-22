@@ -1,3 +1,6 @@
 #pragma once
+#include "./a.h"
 
-using num = double;
+
+//using namespace a;
+

@@ -69,18 +69,60 @@ i32 Mouse::curPos(I_Coord2d_i32& ans) {
 	return 0;
 }
 
-i32 Mouse::click() {
-	click(MouseClick::left);
-	return 0;
-}
+// i32 Mouse::click() {
+// 	click(MouseClick::left);
+// 	return 0;
+// }
 
-i32 Mouse::click(MouseClick key) {
-	DWORD button = (key == MouseClick::left) ? MOUSEEVENTF_LEFTDOWN : MOUSEEVENTF_RIGHTDOWN;
+// /**
+//  * @deprecated
+//  */
+// i32 Mouse::click(MouseClick key) {
+// 	DWORD button = (key == MouseClick::left) ? MOUSEEVENTF_LEFTDOWN : MOUSEEVENTF_RIGHTDOWN;
 
-	// Simulate mouse down
-	mouse_event(button, 0, 0, 0, 0);
-	// Simulate mouse up
-	mouse_event(button | MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+// 	// Simulate mouse down
+// 	mouse_event(button, 0, 0, 0, 0);
+// 	// Simulate mouse up
+// 	mouse_event(button | MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+// 	return 0;
+// }
+
+i32 Mouse::click(MouseClick key, KeyState keyState){
+	// 枚舉 key 有 left, middle, right
+	// 枚舉 keyState 有 up, down
+	// 幫我實現這函數 平臺是windows
+
+	DWORD button;
+	switch (key) {
+		case MouseClick::left:
+			button = MOUSEEVENTF_LEFTDOWN;
+			break;
+		case MouseClick::middle:
+			button = MOUSEEVENTF_MIDDLEDOWN;
+			break;
+		case MouseClick::right:
+			button = MOUSEEVENTF_RIGHTDOWN;
+			break;
+		default:
+			return -1; // Invalid mouse button
+	}
+
+	// Determine the action (down or up)
+	if (keyState == KeyState::down) {
+		// Simulate mouse button down
+		mouse_event(button, 0, 0, 0, 0);
+		return 0;
+	} else if (keyState == KeyState::up) {
+		// Simulate mouse button up
+		button = (key == MouseClick::left) ? MOUSEEVENTF_LEFTUP :
+					(key == MouseClick::middle) ? MOUSEEVENTF_MIDDLEUP :
+					MOUSEEVENTF_RIGHTUP;
+		mouse_event(button, 0, 0, 0, 0);
+		return 0;
+	} else {
+		return -1; // Invalid key state
+	}
+
 	return 0;
 }
 

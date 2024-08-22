@@ -1,3 +1,3 @@
 #pragma once
+#include <iostream>
 
-using num = long long;

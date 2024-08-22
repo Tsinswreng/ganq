@@ -20,8 +20,10 @@ public:
 	i32 move_hv(i32 horiz, i32 vert) override;
 	i32 scroll_hv(i32 horiz, i32 vert) override;
 	i32 curPos(Coord2d& pos) override;
-	i32 click() override;
-	i32 click(MouseClick key) override;
+	// i32 click() override;
+	// i32 click(MouseClick key) override;
+	i32 click(MouseClick key, KeyState keyState) override;
+
 };
 
 } // namespace _
