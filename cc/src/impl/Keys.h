@@ -1,12 +1,11 @@
+#pragma once
 //#include <string>
 #include "impl/Key.h"
 //#include "IF/I_Key.h"
 #include "common.h"
-using namespace std;
 
-namespace _ {
-
-namespace{
+namespace Keys_h{
+	using namespace _;
 	using Kt = an<Key>;
 	//using Kt = Key&;
 	inline Kt KEY(string name, i32 code){
@@ -15,8 +14,9 @@ namespace{
 
 }
 
+namespace _ {
 
-
+using namespace Keys_h;
 class Keys {
 
 protected:
