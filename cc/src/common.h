@@ -64,7 +64,10 @@ using Opt = std::optional<T>;
 template <class K, class V>
 using UMap = std::unordered_map<K, V>;
 
+template<class T>
+using Fun = std::function<T>;
 
+using std::nullopt;
 
 // template <typename... Args>
 // auto mkuq(Args&&... args) -> decltype(std::make_unique(std::forward<Args>(args)...)) {
@@ -87,7 +90,11 @@ using UMap = std::unordered_map<K, V>;
  */
 template <class X, class Y>
 inline an<X> As(const an<Y>& ptr) {
-	return std::dynamic_pointer_cast<X>(ptr);
+	auto ans = std::dynamic_pointer_cast<X>(ptr);
+	if(ans == nullptr){
+		throw std::bad_cast();
+	}
+	return ans;
 }
 
 
