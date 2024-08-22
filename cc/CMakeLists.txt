@@ -5,13 +5,17 @@ cmake_minimum_required(VERSION 3.5)
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 # 设置 C 编译器和 C++ 编译器
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_C_COMPILER gcc)
 set(CMAKE_CXX_COMPILER g++)
 #set(CMAKE_C_COMPILER clang)
 #set(CMAKE_CXX_COMPILER clang++)
 
 project(ngaq)
+
+
+
+
 # 有效>
 set(nlohmann_json_DIR "${CMAKE_SOURCE_DIR}/vcpkg_installed/x64-windows/share/nlohmann_json")
 # 不效>
@@ -82,6 +86,10 @@ execute_process(COMMAND em++ --cflags
 set_target_properties(ngaq PROPERTIES COMPILE_FLAGS "${EM_CFLAGS}")
 #}
 
+# 静态链接標準庫
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++")
+#target_link_libraries(ngaq -static-libgcc -static-libstdc++)
+#target_link_libraries(ngaq -static-libgcc -static-libstdc++)
 
 #{
 #https://github.com/clangd/clangd/issues/1621

@@ -35,8 +35,11 @@ public:
 	bool isMouseMode_(){return _isMouseMode;}
 	void isMouseMode_(bool v){_isMouseMode = v;}
 
-	i32 mouseStep_(){return _mouseStep;}
-	void mouseStep_(i32 v){_mouseStep = v;}
+	i32 mouseStep_normal_(){return _mouseStep_normal;}
+	void mouseStep_normal_(i32 v){_mouseStep_normal = v;}
+
+	i32 mouseStep_fast_(){return _mouseStep_fast;}
+	void mouseStep_fast_(i32 v){_mouseStep_fast = v;}
 
 
 	void test(){
@@ -65,7 +68,11 @@ protected:
 	bool _isAltDown = false;
 	bool _isMetaDown = false;
 	bool _isMouseMode = false;
-	i32 _mouseStep = 50;
+	i32 _mouseStep_normal = 50;
+
+	i32 _mouseStep_fast = 200;
+
+
 
 //No viable conversion from 'shared_ptr<CyclicArray<_::KeyEvent>>' to 'shared_ptr<I_CyclicArray<I_KeyEvent>>'clang(typecheck_nonviable_condition)
 	// std::shared_ptr<I_CyclicArray<I_KeyEvent>> h 

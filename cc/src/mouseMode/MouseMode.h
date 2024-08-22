@@ -28,52 +28,14 @@ class MouseMode : public I_handleKeyEvent{
 
 protected:
 	UMap<i32, ::MouseMode::Fn_t> keyCode__fn;
-	void _init_keyCode__fn(){
-		keyCode__fn[keys.W->code_()] = [this]()->Opt<KeyEventResult>{
-			if(_curKey->state_() == KeyState::down){
-				_mouse.click(MouseClick::left, KeyState::down);
-			}else{
-				_mouse.click(MouseClick::left, KeyState::up);
-			}
-			
-			return KeyEventResult::kAccepted;
-		};
-
-		keyCode__fn[keys.E->code_()] = [this]()->Opt<KeyEventResult>{
-			if(_curKey->state_() == KeyState::down){
-				_mouse.click(MouseClick::right, KeyState::down);
-			}else{
-				_mouse.click(MouseClick::right, KeyState::up);
-			}
-			return KeyEventResult::kAccepted;
-		};
-
-	}
+	void _init_keyCode__fn();
 
 	::MouseMode::Kt _curKey;
 	MouseModeOpt& _opt = MouseModeOpt::inst();
 	Mouse _mouse;
 	Keys keys = Keys::inst();
 	an<Status> _status = mkuq<Status>();
-	void _updStatus(::MouseMode::Kt key){
-		_status->history_()->addBackF(key);
-
-		if(
-			KeyEvent::isKeyDown(*key, *keys.Shift_L)
-			|| KeyEvent::isKeyDown(*key, *keys.Shift_R)
-		){
-			_status->isShiftDown_(true);
-			return;
-		}
-
-		if(
-			KeyEvent::isKeyUp(*key, *keys.Shift_L)
-			|| KeyEvent::isKeyUp(*key, *keys.Shift_R)
-		){
-			_status->isShiftDown_(false);
-			return;
-		}
-	}
+	void _updShiftStatus(::MouseMode::Kt key);
 public:
 
 	MouseMode(){
@@ -85,130 +47,79 @@ public:
 	//void status_(Status v){_status = v;}
 
 
-	KeyEventResult handleKeyEvent(an<I_KeyEvent> key){
-		//println(0);
-		_curKey = key;
-		_updStatus(key);
-		//println(1);// -
-		if(status_()->isShiftDown_()){
-			status_()->mouseStep_(
-				_opt.mouseStep_slow_()
-			);
-		}else{
-			status_()->mouseStep_(
-				_opt.mouseStep_()
-			);
-		}
-		println("_____");
-		println("name: ", key->key_()->name_());
-		println("code: ", key->key_()->code_());
-		println( "state: ",
-			static_cast<i32>(key->state_())
-		);
-		println(AC.Cyan, "mouseMode: ", status_()->isMouseMode_(), AC.Reset);
-		//println(keyEvent.state_());
-		
-		auto it = keyCode__fn.find(key->key_()->code_());
-		
-		if(it != keyCode__fn.end()){ // 判斷是否有對應的函式
-			auto resl = it->second();
-			if(resl != nullopt){
-				return resl.value();
-			}
-		}
-		
-		
-		if(
-			KeyEvent::isKeyDown(*key, *keys.F1)
-		){
-			if(status_()->isMouseMode_()){
-				status_()->isMouseMode_(false);
-			}else{
-				status_()->isMouseMode_(true);
-			}
-			return KeyEventResult::kAccepted;
-		}
-		if(!status_()->isMouseMode_()){
-			return KeyEventResult::kNoop;
-		}
+	KeyEventResult handleKeyEvent(an<I_KeyEvent> key);
 
-		normalMove(key);
-		fastMove(key);
+	// KeyEventResult normalMove(an<I_KeyEvent> key){
+	// 	auto step = status_()->mouseStep_normal_();
+	// 	if( KeyEvent::isKeyDown(*key, *keys.J) ){
+	// 		_mouse.move_hv(-1*step, 0);
+	// 		return KeyEventResult::kAccepted;
+	// 	}
 
-		return KeyEventResult::kAccepted;
-	}
+	// 	if( KeyEvent::isKeyDown(*key, *keys.K) ){
+	// 		_mouse.move_hv(0, step);
+	// 		return KeyEventResult::kAccepted;
+	// 	}
 
-	KeyEventResult normalMove(an<I_KeyEvent> key){
-		auto step = status_()->mouseStep_();
-		if( KeyEvent::isKeyDown(*key, *keys.J) ){
-			_mouse.move_hv(-1*step, 0);
-			return KeyEventResult::kAccepted;
-		}
+	// 	if( KeyEvent::isKeyDown(*key, *keys.L) ){
+	// 		_mouse.move_hv(0, -1*step);
+	// 		return KeyEventResult::kAccepted;
+	// 	}
 
-		if( KeyEvent::isKeyDown(*key, *keys.K) ){
-			_mouse.move_hv(0, step);
-			return KeyEventResult::kAccepted;
-		}
+	// 	if( KeyEvent::isKeyDown(*key, *keys.Semicolon) ){
+	// 		_mouse.move_hv(step, 0);
+	// 		return KeyEventResult::kAccepted;
+	// 	}
+	// 	return KeyEventResult::kNoop;
+	// }
 
-		if( KeyEvent::isKeyDown(*key, *keys.L) ){
-			_mouse.move_hv(0, -1*step);
-			return KeyEventResult::kAccepted;
-		}
+	// KeyEventResult fastMove(an<I_KeyEvent> key){
+	// 	auto step = status_()->mouseStep_normal_() * 4;
+	// 	if( KeyEvent::isKeyDown(*key, *keys.N) ){
+	// 		_mouse.move_hv(-1*step, 0);
+	// 		return KeyEventResult::kAccepted;
+	// 	}
 
-		if( KeyEvent::isKeyDown(*key, *keys.Semicolon) ){
-			_mouse.move_hv(step, 0);
-			return KeyEventResult::kAccepted;
-		}
-		return KeyEventResult::kNoop;
-	}
+	// 	if( KeyEvent::isKeyDown(*key, *keys.M) ){
+	// 		_mouse.move_hv(0, step);
+	// 		return KeyEventResult::kAccepted;
+	// 	}
 
-	KeyEventResult fastMove(an<I_KeyEvent> key){
-		auto step = status_()->mouseStep_() * 4;
-		if( KeyEvent::isKeyDown(*key, *keys.N) ){
-			_mouse.move_hv(-1*step, 0);
-			return KeyEventResult::kAccepted;
-		}
+	// 	if( KeyEvent::isKeyDown(*key, *keys.Comma) ){
+	// 		_mouse.move_hv(0, -1*step);
+	// 		return KeyEventResult::kAccepted;
+	// 	}
 
-		if( KeyEvent::isKeyDown(*key, *keys.M) ){
-			_mouse.move_hv(0, step);
-			return KeyEventResult::kAccepted;
-		}
+	// 	if( KeyEvent::isKeyDown(*key, *keys.Period) ){
+	// 		_mouse.move_hv(step, 0);
+	// 		return KeyEventResult::kAccepted;
+	// 	}
+	// 	return KeyEventResult::kNoop;
+	// }
 
-		if( KeyEvent::isKeyDown(*key, *keys.Comma) ){
-			_mouse.move_hv(0, -1*step);
-			return KeyEventResult::kAccepted;
-		}
+	// KeyEventResult scrollMove(an<I_KeyEvent> key){
+	// 	auto step = status_()->mouseStep_normal_();
+	// 	if( KeyEvent::isKeyDown(*key, *keys.J) ){
+	// 		_mouse.move_hv(-1*step, 0);
+	// 		return KeyEventResult::kAccepted;
+	// 	}
 
-		if( KeyEvent::isKeyDown(*key, *keys.Period) ){
-			_mouse.move_hv(step, 0);
-			return KeyEventResult::kAccepted;
-		}
-		return KeyEventResult::kNoop;
-	}
+	// 	if( KeyEvent::isKeyDown(*key, *keys.K) ){
+	// 		_mouse.move_hv(0, step);
+	// 		return KeyEventResult::kAccepted;
+	// 	}
 
-	KeyEventResult scrollMove(an<I_KeyEvent> key){
-		auto step = status_()->mouseStep_();
-		if( KeyEvent::isKeyDown(*key, *keys.J) ){
-			_mouse.move_hv(-1*step, 0);
-			return KeyEventResult::kAccepted;
-		}
+	// 	if( KeyEvent::isKeyDown(*key, *keys.L) ){
+	// 		_mouse.move_hv(0, -1*step);
+	// 		return KeyEventResult::kAccepted;
+	// 	}
 
-		if( KeyEvent::isKeyDown(*key, *keys.K) ){
-			_mouse.move_hv(0, step);
-			return KeyEventResult::kAccepted;
-		}
-
-		if( KeyEvent::isKeyDown(*key, *keys.L) ){
-			_mouse.move_hv(0, -1*step);
-			return KeyEventResult::kAccepted;
-		}
-
-		if( KeyEvent::isKeyDown(*key, *keys.Semicolon) ){
-			_mouse.move_hv(step, 0);
-			return KeyEventResult::kAccepted;
-		}
-		return KeyEventResult::kNoop;
-	}
+	// 	if( KeyEvent::isKeyDown(*key, *keys.Semicolon) ){
+	// 		_mouse.move_hv(step, 0);
+	// 		return KeyEventResult::kAccepted;
+	// 	}
+	// 	return KeyEventResult::kNoop;
+	//}
 
 };
 

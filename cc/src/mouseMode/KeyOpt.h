@@ -13,7 +13,8 @@ protected:
 	Keys& keys = Keys::inst();
 	i32 _mouseStep = 50;
 	i32 _mouseStep_slow = 10;
-	i32 _mouseStep_fast;
+	i32 _mouseStep_fast = 200;
+	i32 _mouseStep_faster = 800;
 public:
 
 	static MouseModeOpt& inst(){
@@ -33,6 +34,10 @@ public:
 
 	i32 mouseStep_fast_(){return _mouseStep_fast;}
 	void mouseStep_fast_(i32 v){_mouseStep_fast = v;}
+
+	i32 mouseStep_faster_(){return _mouseStep_faster;}
+	void mouseStep_faster_(i32 v){_mouseStep_faster = v;}
+
 
 };
 
