@@ -4,7 +4,7 @@
 #include "enum/MouseClick.h"
 #include "IF/I_Coord2d.h"
 
-namespace ngaq {
+namespace _ {
 
 namespace {
 	//使 只在當前文件中有效
@@ -28,4 +28,4 @@ public:
 	// virtual i32 move(垂直距, 水平距) = 0;
 };
 
-}//~namespace ngaq
+}//~namespace _

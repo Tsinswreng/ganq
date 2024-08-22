@@ -1,6 +1,6 @@
 #pragma once
 #include "common.h"
-namespace ngaq {
+namespace _ {
 
 class I_Key {
 public:
@@ -9,4 +9,4 @@ public:
 	virtual i32 code_() = 0;
 };
 
-}//~namespace ngaq
+}//~namespace _

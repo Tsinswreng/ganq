@@ -1,10 +1,10 @@
 #pragma once
 
-namespace ngaq{
+namespace _{
 
 enum class KeyState{
 	down
 	,up
 };
 
-}//~namespace ngaq
+}//~namespace _

@@ -1,7 +1,7 @@
 #pragma once
 
-namespace ngaq {
+namespace _ {
 
 int add(int a, int b);
 
-}//~namespace ngaq
+}//~namespace _

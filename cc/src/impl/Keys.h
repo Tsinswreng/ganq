@@ -4,7 +4,7 @@
 #include "common.h"
 using namespace std;
 
-namespace ngaq {
+namespace _ {
 
 namespace{
 	using Kt = an<Key>;
@@ -129,4 +129,4 @@ public:
 	Kt Quote = KEY("Quote", 222);
 };
 
-}//~namespace ngaq
+}//~namespace _

@@ -1,7 +1,7 @@
-namespace ngaq {
+namespace _ {
 
 int add(int a, int b){
 	return a+b;
 }
 
-}//~namespace ngaq
+}//~namespace _

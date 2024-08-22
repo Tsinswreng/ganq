@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ngaq{
+namespace _{
 
 enum Direct2d {
 	left,
@@ -9,5 +9,5 @@ enum Direct2d {
 	down
 };
 
-}//~namespace ngaq
+}//~namespace _
 

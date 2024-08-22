@@ -4,7 +4,7 @@
 #include "IF/I_Key.h"
 #include "enum/KeyState.h"
 
-namespace ngaq {
+namespace _ {
 
 class KeyEvent : public I_KeyEvent {
 public:
@@ -21,4 +21,4 @@ protected:
 	KeyState _state;
 };
 
-}//~namespace ngaq
+}//~namespace _

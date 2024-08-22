@@ -2,6 +2,7 @@
   "version": "3",
   "dependencies": [
     "gtest",
-    "nlohmann-json"
+    "nlohmann-json",
+	"yaml-cpp"
   ]
 }

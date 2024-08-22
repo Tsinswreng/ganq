@@ -1,5 +1,5 @@
 #pragma once
-namespace ngaq{
+namespace _{
 
 template <class Num_t>
 class I_Coord2d{
@@ -11,4 +11,4 @@ public:
 	virtual void y_(Num_t y) = 0;
 };
 
-}//~namespace ngaq
+}//~namespace _

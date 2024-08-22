@@ -1,6 +1,6 @@
 #include "./KeyEvent.h"
 #include "enum/KeyState.h"
-namespace ngaq {
+namespace _ {
 
 bool KeyEvent::isKeyDown(I_KeyEvent& e, I_Key& key){
 	// println("e.key_()->code_(): ",e.key_()->code_());
@@ -31,4 +31,4 @@ bool KeyEvent::isKeyUp(I_KeyEvent& e, I_Key& key){
 }
 
 
-}//namespace ngaq
+}//namespace _

@@ -9,7 +9,7 @@
 #include "impl/convertKeyEvent.h"
 
 
-namespace ngaq {
+namespace _ {
 
 
 
@@ -80,4 +80,4 @@ int main_mouseMode() {
 }
 
 
-}//~namespace ngaq
+}//~namespace _

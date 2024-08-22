@@ -6,7 +6,7 @@
 #include <iostream>
 #include "tools/AnsiColors.h"
 
-namespace ngaq {
+namespace _ {
 
 static auto& AC = AnsiColors::inst();
 
@@ -48,4 +48,4 @@ i32 convertKeyEvent(
 	return -1;
 }
 
-}//~namespace ngaq
+}//~namespace _

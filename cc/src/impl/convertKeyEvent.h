@@ -2,7 +2,7 @@
 #include "Windows.h"
 #include "impl/KeyEvent.h"
 
-namespace ngaq {
+namespace _ {
 
 
 i32 convertKeyEvent(
@@ -13,4 +13,4 @@ i32 convertKeyEvent(
 );
 
 
-}//~namespace ngaq
+}//~namespace _

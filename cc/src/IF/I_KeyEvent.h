@@ -2,7 +2,7 @@
 #include "common.h"
 #include "IF/I_Key.h"
 #include "enum/KeyState.h"
-namespace ngaq {
+namespace _ {
 
 class I_KeyEvent {
 public:
@@ -10,4 +10,4 @@ public:
 	virtual KeyState state_() = 0;
 };
 
-}//~namespace ngaq
+}//~namespace _

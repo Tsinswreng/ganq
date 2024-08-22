@@ -1,5 +1,5 @@
 #pragma once
 
-namespace ngaq {
+namespace _ {
 	int main_mouseMode();
 }

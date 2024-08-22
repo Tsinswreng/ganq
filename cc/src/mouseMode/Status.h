@@ -5,7 +5,7 @@
 #include "IF/I_KeyEvent.h"
 #include <memory>
 #include <vector>
-namespace ngaq {
+namespace _ {
 
 namespace {
 // I_CyclicArray是CyclicArray的父類、I_KeyEvent是KeyEvent的父類、an是共享指針
@@ -54,7 +54,7 @@ protected:
 	bool _isMetaDown = false;
 	bool _isMouseMode = false;
 
-//No viable conversion from 'shared_ptr<CyclicArray<ngaq::KeyEvent>>' to 'shared_ptr<I_CyclicArray<I_KeyEvent>>'clang(typecheck_nonviable_condition)
+//No viable conversion from 'shared_ptr<CyclicArray<_::KeyEvent>>' to 'shared_ptr<I_CyclicArray<I_KeyEvent>>'clang(typecheck_nonviable_condition)
 	// std::shared_ptr<I_CyclicArray<I_KeyEvent>> h 
 	// 	= std::make_shared<CyclicArray<KeyEvent>>(16); 
 
@@ -65,5 +65,5 @@ protected:
 };
 
 
-}//~namespace ngaq
+}//~namespace _
 

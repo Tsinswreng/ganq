@@ -4,7 +4,7 @@
 
 
 
-namespace ngaq {
+namespace _ {
 
 namespace {
 	//使 只在當前文件中有效
@@ -24,4 +24,4 @@ public:
 	i32 click(MouseClick key) override;
 };
 
-} // namespace ngaq
+} // namespace _

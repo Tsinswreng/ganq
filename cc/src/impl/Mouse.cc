@@ -4,7 +4,7 @@
 // #include "IF/I_Coord2d.h"
 #include "impl/Coord2d.h"
 
-namespace ngaq {
+namespace _ {
 
 i32 Mouse::moveTo(i32 x, i32 y) {
 	SetCursorPos(x, y);
@@ -86,4 +86,4 @@ i32 Mouse::click(MouseClick key) {
 
 
 
-} // namespace ngaq
+} // namespace _

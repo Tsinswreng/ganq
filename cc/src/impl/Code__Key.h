@@ -7,7 +7,7 @@
 #include <unordered_map>
 #include "./Keys.h" // 确保包含 Keys 类的定义
 
-namespace ngaq {
+namespace _ {
 
 namespace {
 	using KMap = UMap<i32, an<Key>>;
@@ -142,6 +142,6 @@ protected:
 	}
 };
 
-}//~namespace ngaq
+}//~namespace _
 
 #endif // KEY_MAPPING_H

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ngaq {
+namespace _ {
 
 enum class KeyEventResult {
 	kNoop
@@ -8,4 +8,4 @@ enum class KeyEventResult {
 	,kRejected
 };
 
-}//~namespace ngaq
+}//~namespace _

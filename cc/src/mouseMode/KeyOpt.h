@@ -2,12 +2,12 @@
 #include "common.h"
 #include "impl/Keys.h"
 #include "IF/I_Key.h"
-namespace ngaq {
+namespace _ {
 
-class MouseOpt {
+class MouseModeOpt {
 
 protected:
-	Keys keys = Keys::inst();
+	Keys& keys = Keys::inst();
 
 public:
 	an<I_Key> left = keys.J;
@@ -16,4 +16,4 @@ public:
 	an<I_Key> up = keys.Semicolon;
 };
 
-}//~namespace ngaq
+}//~namespace _

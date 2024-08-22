@@ -7,7 +7,7 @@
 // #include "enum/Direct2d.h"
 // #include <chrono>
 
-// namespace ngaq{
+// namespace _{
 // i32 _(){
 // 	auto mouse = Mouse();
 // 	mouse.moveTo(500, 300);
@@ -18,9 +18,9 @@
 	
 // 	return 0;
 // }
-// }//~namespace ngaq
+// }//~namespace _
 
 
 // int main(){
-// 	return ngaq::_();
+// 	return _::_();
 // }

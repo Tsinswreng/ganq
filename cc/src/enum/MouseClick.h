@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ngaq {
+namespace _ {
 
 enum class MouseClick {
 	left,

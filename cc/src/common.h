@@ -40,7 +40,7 @@ inline void println(){
 }
 
 
-namespace ngaq{
+namespace _{
 
 template <class T>
 using the = std::unique_ptr<T>;
@@ -119,7 +119,7 @@ inline auto mv(T&& v){
 
 
 
-}//~namespace ngaq
+}//~namespace _
 
 
 

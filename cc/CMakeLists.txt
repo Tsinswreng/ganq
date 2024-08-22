@@ -23,10 +23,10 @@ find_package(nlohmann_json REQUIRED)
 
 
 
-#add_executable(ngaq src/main.cc src/lex.h src/lex.cc src/common.h)
-#add_executable(ngaq src/main.cc)
+#add_executable(_ src/main.cc src/lex.h src/lex.cc src/common.h)
+#add_executable(_ src/main.cc)
 
-#target_include_directories(ngaq PRIVATE ${CMAKE_SOURCE_DIR}/src)
+#target_include_directories(_ PRIVATE ${CMAKE_SOURCE_DIR}/src)
 
 # 從src根目錄開始找
 include_directories(${CMAKE_SOURCE_DIR}/src)
@@ -47,20 +47,20 @@ string(REPLACE ";" "\n" ngaq_SRC_STRING "${ngaq_SRC}")
 # 打印文件列表
 message("Found source files:\n${ngaq_SRC_STRING}")
 
-# add_executable(ngaq testEmcc.cpp)
+# add_executable(_ testEmcc.cpp)
 add_executable(ngaq ${ngaq_SRC})
-#add_library(ngaq STATIC ${ngaq_SRC})
+#add_library(_ STATIC ${ngaq_SRC})
 
 execute_process(COMMAND em++ --cflags
 	OUTPUT_VARIABLE EM_CFLAGS
 )
-#set_target_properties(ngaq PROPERTIES COMPILE_FLAGS "${EM_CFLAGS}")
+#set_target_properties(_ PROPERTIES COMPILE_FLAGS "${EM_CFLAGS}")
 
 
-#set_target_properties(ngaq PROPERTIES SUFFIX ".js")
+#set_target_properties(_ PROPERTIES SUFFIX ".js")
 
 #不能有空格、[]內亦然
-# target_link_options(ngaq PRIVATE
+# target_link_options(_ PRIVATE
 # 	-sMODULARIZE=1
 # 	-sEXPORT_ES6=1
 # 	-sEXPORTED_RUNTIME_METHODS=['setValue','getValue','AsciiToString','UTF8ToString','cwrap']
@@ -78,7 +78,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 execute_process(COMMAND em++ --cflags
 	OUTPUT_VARIABLE EM_CFLAGS
 )
-#设置目标 ngaq 的编译标志：
+#设置目标 _ 的编译标志：
 set_target_properties(ngaq PROPERTIES COMPILE_FLAGS "${EM_CFLAGS}")
 #}
 
@@ -109,12 +109,12 @@ endif()
 #}
 
 
-# target_link_options(ngaq PRIVATE
+# target_link_options(_ PRIVATE
 # 	-sMODULARIZE=1 -sEXPORT_ES6=1
 # 	-sEXPORTED_FUNCTIONS='["_parse", "_main"]'
 # )
 
-# target_link_options(ngaq PRIVATE 
+# target_link_options(_ PRIVATE
 # 	"-s MODULARIZE=1"
 # 	"-s EXPORT_ES6=1"
 # 	"-s EXPORTED_RUNTIME_METHODS=['cwrap', 'setValue', 'getValue', 'AsciiToString']"
@@ -128,11 +128,11 @@ endif()
 # 	-s "EXPORTED_RUNTIME_METHODS=['cwrap', 'setValue', 'getValue', 'AsciiToString']"
 # )
 
-# set_property(TARGET ngaq PROPERTY COMPILE_OPTIONS
+# set_property(TARGET _ PROPERTY COMPILE_OPTIONS
 # 	"-sMODULARIZE=1;-sEXPORT_ES6=1;-sEXPORTED_RUNTIME_METHODS=['cwrap', 'setValue', 'getValue', 'AsciiToString']"
 # )
 
 
 
 # 添加链接选项
-#target_link_options(ngaq PRIVATE "-s EXPORTED_RUNTIME_METHODS=['cwrap', 'setValue', 'getValue', 'AsciiToString']")
+#target_link_options(_ PRIVATE "-s EXPORTED_RUNTIME_METHODS=['cwrap', 'setValue', 'getValue', 'AsciiToString']")

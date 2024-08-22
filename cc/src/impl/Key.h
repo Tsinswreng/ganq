@@ -1,7 +1,7 @@
 #pragma once
 #include "IF/I_Key.h"
 
-namespace ngaq{
+namespace _{
 
 class Key : public I_Key{
 public:
@@ -22,4 +22,4 @@ protected:
 	i32 _code;
 };
 
-}//~namespace ngaq
+}//~namespace _

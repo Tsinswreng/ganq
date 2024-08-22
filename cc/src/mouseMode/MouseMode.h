@@ -8,12 +8,13 @@
 #include "impl/Mouse.h"
 #include "impl/Keys.h"
 #include "./Status.h"
+#include "tools/AnsiColors.h"
 
-namespace ngaq {
-
+namespace _ {
 
 namespace {
 	//using KeyEvent::isKeyDown;
+	static auto& AC = AnsiColors::inst();
 }
 
 class MouseMode : public I_handleKeyEvent{
@@ -29,21 +30,22 @@ public:
 
 	KeyEventResult handleKeyEvent(an<I_KeyEvent> key){
 		println("_____");
-		println("key: ", &key);
 		println("name: ", key->key_()->name_());
+		println("code: ", key->key_()->code_());
 		println( "state: ",
 			static_cast<i32>(key->state_())
 		);
+		println(AC.Cyan, "mouseMode: ", status_()->isMouseMode_(), AC.Reset);
 		//println(keyEvent.state_());
 		if(
-			!KeyEvent::isKeyUp(*key, *keys.F1)
+			KeyEvent::isKeyDown(*key, *keys.F1)
 		){
 			if(status_()->isMouseMode_()){
 				status_()->isMouseMode_(false);
 			}else{
 				status_()->isMouseMode_(true);
 			}
-			//return KeyEventResult::kAccepted;
+			return KeyEventResult::kAccepted;
 		}
 
 		if(!status_()->isMouseMode_()){
@@ -74,5 +76,5 @@ public:
 
 };
 
-}//~namespace ngaq
+}//~namespace _
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "common.h"
-namespace ngaq {
+namespace _ {
 
 class AnsiColors {
 public:
@@ -52,4 +52,4 @@ public:
 
 
 
-}//~namespace ngaq
+}//~namespace _

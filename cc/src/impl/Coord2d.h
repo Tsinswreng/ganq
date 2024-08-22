@@ -2,7 +2,7 @@
 #include "common.h"
 #include "IF/I_Coord2d.h"
 
-namespace ngaq{
+namespace _{
 
 using I_Coord2d_i32 = I_Coord2d<i32>;
 
@@ -19,4 +19,4 @@ protected:
 	i32 _y;
 };
 
-}//~namespace ngaq
+}//~namespace _
