@@ -35,7 +35,7 @@ protected:
 	Mouse _mouse;
 	Keys keys = Keys::inst();
 	an<Status> _status = mkuq<Status>();
-	void _updShiftStatus(::MouseMode::Kt key);
+	void _updStatus(::MouseMode::Kt key);
 public:
 
 	MouseMode(){

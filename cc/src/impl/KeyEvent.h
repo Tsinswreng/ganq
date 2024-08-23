@@ -15,6 +15,7 @@ public:
 
 	static bool isKeyDown(I_KeyEvent& e, I_Key& key);
 	static bool isKeyUp(I_KeyEvent& e, I_Key& key);
+	static bool eq(I_KeyEvent& e1, I_KeyEvent& e2);
 
 protected:
 	an<I_Key> _key;

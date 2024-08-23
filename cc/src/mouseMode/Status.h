@@ -41,6 +41,13 @@ public:
 	i32 mouseStep_fast_(){return _mouseStep_fast;}
 	void mouseStep_fast_(i32 v){_mouseStep_fast = v;}
 
+	/** 當前KeyEvent是否同於上個 */
+	bool duplicateEvent_(){return _duplicateEvent;}
+	void duplicateEvent_(bool v){_duplicateEvent = v;}
+
+	i64 cnt = 0;
+
+
 
 	void test(){
 		//std::make_shared<CyclicArray<an<KeyEvent>>>(16);
@@ -71,6 +78,8 @@ protected:
 	i32 _mouseStep_normal = 50;
 
 	i32 _mouseStep_fast = 200;
+
+	bool _duplicateEvent = false;
 
 
 

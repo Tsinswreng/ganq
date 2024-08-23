@@ -1,8 +1,19 @@
 #include "./MouseMode.h"
+#include <thread>
+#include <chrono>
 
 namespace _ {
 
-void MouseMode::_updShiftStatus(::MouseMode::Kt key){
+void MouseMode::_updStatus(::MouseMode::Kt key){
+
+	status_()->cnt ++;
+	auto prev = status_()->history_()->backGet(1);
+	
+	if(prev != nullptr && KeyEvent::eq(*_curKey, *prev)){
+		status_()->duplicateEvent_(true);
+	}else{
+		status_()->duplicateEvent_(false);
+	}
 	
 
 	if(
@@ -10,16 +21,16 @@ void MouseMode::_updShiftStatus(::MouseMode::Kt key){
 		|| KeyEvent::isKeyDown(*key, *keys.Shift_R)
 	){
 		_status->isShiftDown_(true);
-		return;
-	}
-
-	if(
+		
+	}else if(
 		KeyEvent::isKeyUp(*key, *keys.Shift_L)
 		|| KeyEvent::isKeyUp(*key, *keys.Shift_R)
 	){
 		_status->isShiftDown_(false);
-		return;
+		
 	}
+	
+
 }
 
 void MouseMode::_init_keyCode__fn(){
@@ -43,6 +54,36 @@ void MouseMode::_init_keyCode__fn(){
 			return KeyEventResult::kAccepted;
 		};
 
+
+
+		// 試 持續左移 //TODO 用線程池 否則每次按鍵都會開一個新的線程
+		M[keys.H->code_()] = [this]()->Opt<KeyEventResult>{
+			if(_curKey->state_() == KeyState::down){
+				std::thread([this](){
+					auto initCnt = status_()->cnt;
+					for(i32 i = 0;;i++){
+						_mouse.move_cc(
+							-1 * 5, 0
+						);
+
+						if(
+							status_()->cnt != initCnt
+							&& !status_()->duplicateEvent_()
+						){
+							break;
+						}
+						std::this_thread::sleep_for(
+							std::chrono::milliseconds(50)
+						);
+					}
+					
+				}).detach();
+			}else{
+				
+			}
+			return KeyEventResult::kAccepted;
+		};
+
 		// 左移
 		M[keys.J->code_()] = [this]()->Opt<KeyEventResult>{
 			if(_curKey->state_() == KeyState::down){
@@ -56,7 +97,6 @@ void MouseMode::_init_keyCode__fn(){
 		};
 		// 右移
 		M[keys.Semicolon->code_()] = [this]()->Opt<KeyEventResult>{
-			println("right");
 			if(_curKey->state_() == KeyState::down){
 				_mouse.move_cc(
 					_status->mouseStep_normal_(), 0
@@ -203,6 +243,9 @@ void MouseMode::_init_keyCode__fn(){
 
 KeyEventResult MouseMode::handleKeyEvent(an<I_KeyEvent> key){
 	_curKey = key;
+
+	_status->history_()->addBackF(key);
+	_updStatus(key);
 	//println(1);// -
 
 	println("_____");
@@ -211,9 +254,9 @@ KeyEventResult MouseMode::handleKeyEvent(an<I_KeyEvent> key){
 	println( "state: ",
 		static_cast<i32>(key->state_())
 	);
-	println(AC.Cyan, "mouseMode: ", status_()->isMouseMode_(), AC.Reset);
+	//println(AC.Cyan, "mouseMode: ", status_()->isMouseMode_(), AC.Reset);
 	//println(keyEvent.state_());
-	
+	println(AC.Cyan, "duplicateEvent_: ", status_()->duplicateEvent_(), AC.Reset);
 
 	if(
 		KeyEvent::isKeyDown(*key, *keys.F1)
@@ -232,9 +275,6 @@ KeyEventResult MouseMode::handleKeyEvent(an<I_KeyEvent> key){
 	}
 
 
-
-	_status->history_()->addBackF(key);
-	_updShiftStatus(key);
 
 	if(status_()->isShiftDown_()){
 		status_()->mouseStep_normal_(
