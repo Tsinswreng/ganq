@@ -86,7 +86,7 @@ execute_process(COMMAND em++ --cflags
 set_target_properties(ngaq PROPERTIES COMPILE_FLAGS "${EM_CFLAGS}")
 #}
 
-# 静态链接標準庫
+# 静态链接標準庫 (不能用c++23、否則鏈接失敗)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++")
 #target_link_libraries(ngaq -static-libgcc -static-libstdc++)
 #target_link_libraries(ngaq -static-libgcc -static-libstdc++)

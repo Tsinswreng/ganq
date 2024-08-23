@@ -36,26 +36,26 @@ i32 Mouse::move(Direct2d direct, i32 distance) {
 	return 0;
 }
 
-i32 Mouse::move_hv(i32 horiz, i32 vert) {
+i32 Mouse::move_cc(i32 x, i32 y) {
 	POINT p;
 	GetCursorPos(&p);
 
 	// 更新鼠標位置
-	p.x += horiz;
-	p.y += vert;
+	p.x += x;
+	p.y -= y;
 
 	SetCursorPos(p.x, p.y);
 	return 0;
 }
 
-i32 Mouse::scroll_hv(i32 horiz, i32 vert) {
+i32 Mouse::scroll_cc(i32 x, i32 y) {
 	// 垂直滾動
-	if (vert != 0) {
-		mouse_event(MOUSEEVENTF_WHEEL, 0, 0, vert, 0);
+	if (y != 0) {
+		mouse_event(MOUSEEVENTF_WHEEL, 0, 0, y, 0);
 	}
 	// 水平滾動
-	if (horiz != 0) {
-		mouse_event(MOUSEEVENTF_HWHEEL, 0, 0, horiz, 0);
+	if (x != 0) {
+		mouse_event(MOUSEEVENTF_HWHEEL, 0, 0, x, 0);
 	}
 	return 0;
 }

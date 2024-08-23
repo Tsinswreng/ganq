@@ -17,8 +17,8 @@ public:
 	i32 moveTo(int x, int y) override;
 	i32 move(Direct2d direct, i32 distance) override;
 	/** 正方向: 右, 下 */
-	i32 move_hv(i32 horiz, i32 vert) override;
-	i32 scroll_hv(i32 horiz, i32 vert) override;
+	i32 move_cc(i32 horiz, i32 vert) override;
+	i32 scroll_cc(i32 horiz, i32 vert) override;
 	i32 curPos(Coord2d& pos) override;
 	// i32 click() override;
 	// i32 click(MouseClick key) override;

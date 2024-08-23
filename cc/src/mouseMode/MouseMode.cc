@@ -46,8 +46,8 @@ void MouseMode::_init_keyCode__fn(){
 		// 左移
 		M[keys.J->code_()] = [this]()->Opt<KeyEventResult>{
 			if(_curKey->state_() == KeyState::down){
-				_mouse.move_hv(
-					-1*_status->mouseStep_normal_(), 0
+				_mouse.move_cc(
+					-1 * _status->mouseStep_normal_(), 0
 				);
 			}else{
 				
@@ -58,7 +58,7 @@ void MouseMode::_init_keyCode__fn(){
 		M[keys.Semicolon->code_()] = [this]()->Opt<KeyEventResult>{
 			println("right");
 			if(_curKey->state_() == KeyState::down){
-				_mouse.move_hv(
+				_mouse.move_cc(
 					_status->mouseStep_normal_(), 0
 				);
 			}else{
@@ -70,8 +70,8 @@ void MouseMode::_init_keyCode__fn(){
 		// 下移
 		M[keys.K->code_()] = [this]()->Opt<KeyEventResult>{
 			if(_curKey->state_() == KeyState::down){
-				_mouse.move_hv(
-					0, _status->mouseStep_normal_()
+				_mouse.move_cc(
+					0, _status->mouseStep_normal_() * -1
 				);
 			}else{
 				
@@ -82,8 +82,8 @@ void MouseMode::_init_keyCode__fn(){
 		// 上移
 		M[keys.L->code_()] = [this]()->Opt<KeyEventResult>{
 			if(_curKey->state_() == KeyState::down){
-				_mouse.move_hv(
-					0, _status->mouseStep_normal_()*-1
+				_mouse.move_cc(
+					0, _status->mouseStep_normal_()
 				);
 			}else{
 				
@@ -95,8 +95,8 @@ void MouseMode::_init_keyCode__fn(){
 		// 快左移
 		M[keys.N->code_()] = [this]()->Opt<KeyEventResult>{
 			if(_curKey->state_() == KeyState::down){
-				_mouse.move_hv(
-					-1*_status->mouseStep_fast_(), 0
+				_mouse.move_cc(
+					-1 * _status->mouseStep_fast_(), 0
 				);
 			}else{
 				
@@ -106,7 +106,7 @@ void MouseMode::_init_keyCode__fn(){
 		// 快右移
 		M[keys.Period->code_()] = [this]()->Opt<KeyEventResult>{
 			if(_curKey->state_() == KeyState::down){
-				_mouse.move_hv(
+				_mouse.move_cc(
 					_status->mouseStep_fast_(), 0
 				);
 			}else{
@@ -118,8 +118,8 @@ void MouseMode::_init_keyCode__fn(){
 		// 快下移
 		M[keys.M->code_()] = [this]()->Opt<KeyEventResult>{
 			if(_curKey->state_() == KeyState::down){
-				_mouse.move_hv(
-					0, _status->mouseStep_fast_()
+				_mouse.move_cc(
+					0, _status->mouseStep_fast_() * -1
 				);
 			}else{
 				
@@ -130,8 +130,8 @@ void MouseMode::_init_keyCode__fn(){
 		// 快上移
 		M[keys.Comma->code_()] = [this]()->Opt<KeyEventResult>{
 			if(_curKey->state_() == KeyState::down){
-				_mouse.move_hv(
-					0, _status->mouseStep_fast_()*-1
+				_mouse.move_cc(
+					0, _status->mouseStep_fast_()
 				);
 			}else{
 				
@@ -145,8 +145,8 @@ void MouseMode::_init_keyCode__fn(){
 		// 左移
 		M[keys.A->code_()] = [this]()->Opt<KeyEventResult>{
 			if(_curKey->state_() == KeyState::down){
-				_mouse.scroll_hv(
-					-1*_status->mouseStep_normal_(), 0
+				_mouse.scroll_cc(
+					-1 * _status->mouseStep_normal_(), 0
 				);
 			}else{
 				
@@ -157,7 +157,7 @@ void MouseMode::_init_keyCode__fn(){
 		M[keys.F->code_()] = [this]()->Opt<KeyEventResult>{
 			println("right");
 			if(_curKey->state_() == KeyState::down){
-				_mouse.scroll_hv(
+				_mouse.scroll_cc(
 					_status->mouseStep_normal_(), 0
 				);
 			}else{
@@ -169,8 +169,8 @@ void MouseMode::_init_keyCode__fn(){
 		// 下移
 		M[keys.S->code_()] = [this]()->Opt<KeyEventResult>{
 			if(_curKey->state_() == KeyState::down){
-				_mouse.scroll_hv(
-					0, _status->mouseStep_normal_()
+				_mouse.scroll_cc(
+					0, _status->mouseStep_normal_() * -1
 				);
 			}else{
 				
@@ -181,8 +181,8 @@ void MouseMode::_init_keyCode__fn(){
 		// 上移
 		M[keys.D->code_()] = [this]()->Opt<KeyEventResult>{
 			if(_curKey->state_() == KeyState::down){
-				_mouse.scroll_hv(
-					0, _status->mouseStep_normal_()*-1
+				_mouse.scroll_cc(
+					0, _status->mouseStep_normal_()
 				);
 			}else{
 				

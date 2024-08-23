@@ -18,10 +18,10 @@ public:
 	virtual i32 moveTo(i32 x, i32 y) = 0;
 	/** @deprecated */
 	virtual i32 move(Direct2d direct, i32 distance) = 0;
-	/** 正方嚮: 右, 下 */
-	virtual i32 move_hv(i32 x, i32 y) = 0;
-	/** 正方嚮: 右, 下 */
-	virtual i32 scroll_hv(i32 x, i32 y) = 0;
+	/** 笛卡爾座標系 正方嚮: 右, 上 */
+	virtual i32 move_cc(i32 x, i32 y) = 0;
+	/** 笛卡爾座標系 正方嚮: 右, 上 */
+	virtual i32 scroll_cc(i32 x, i32 y) = 0;
 	virtual i32 curPos(Coord2d& ans) = 0;
 	// virtual i32 click() = 0;
 	// virtual i32 click(MouseClick key) = 0;

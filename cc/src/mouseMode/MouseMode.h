@@ -52,22 +52,22 @@ public:
 	// KeyEventResult normalMove(an<I_KeyEvent> key){
 	// 	auto step = status_()->mouseStep_normal_();
 	// 	if( KeyEvent::isKeyDown(*key, *keys.J) ){
-	// 		_mouse.move_hv(-1*step, 0);
+	// 		_mouse.move_cc(-1*step, 0);
 	// 		return KeyEventResult::kAccepted;
 	// 	}
 
 	// 	if( KeyEvent::isKeyDown(*key, *keys.K) ){
-	// 		_mouse.move_hv(0, step);
+	// 		_mouse.move_cc(0, step);
 	// 		return KeyEventResult::kAccepted;
 	// 	}
 
 	// 	if( KeyEvent::isKeyDown(*key, *keys.L) ){
-	// 		_mouse.move_hv(0, -1*step);
+	// 		_mouse.move_cc(0, -1*step);
 	// 		return KeyEventResult::kAccepted;
 	// 	}
 
 	// 	if( KeyEvent::isKeyDown(*key, *keys.Semicolon) ){
-	// 		_mouse.move_hv(step, 0);
+	// 		_mouse.move_cc(step, 0);
 	// 		return KeyEventResult::kAccepted;
 	// 	}
 	// 	return KeyEventResult::kNoop;
@@ -76,22 +76,22 @@ public:
 	// KeyEventResult fastMove(an<I_KeyEvent> key){
 	// 	auto step = status_()->mouseStep_normal_() * 4;
 	// 	if( KeyEvent::isKeyDown(*key, *keys.N) ){
-	// 		_mouse.move_hv(-1*step, 0);
+	// 		_mouse.move_cc(-1*step, 0);
 	// 		return KeyEventResult::kAccepted;
 	// 	}
 
 	// 	if( KeyEvent::isKeyDown(*key, *keys.M) ){
-	// 		_mouse.move_hv(0, step);
+	// 		_mouse.move_cc(0, step);
 	// 		return KeyEventResult::kAccepted;
 	// 	}
 
 	// 	if( KeyEvent::isKeyDown(*key, *keys.Comma) ){
-	// 		_mouse.move_hv(0, -1*step);
+	// 		_mouse.move_cc(0, -1*step);
 	// 		return KeyEventResult::kAccepted;
 	// 	}
 
 	// 	if( KeyEvent::isKeyDown(*key, *keys.Period) ){
-	// 		_mouse.move_hv(step, 0);
+	// 		_mouse.move_cc(step, 0);
 	// 		return KeyEventResult::kAccepted;
 	// 	}
 	// 	return KeyEventResult::kNoop;
@@ -100,22 +100,22 @@ public:
 	// KeyEventResult scrollMove(an<I_KeyEvent> key){
 	// 	auto step = status_()->mouseStep_normal_();
 	// 	if( KeyEvent::isKeyDown(*key, *keys.J) ){
-	// 		_mouse.move_hv(-1*step, 0);
+	// 		_mouse.move_cc(-1*step, 0);
 	// 		return KeyEventResult::kAccepted;
 	// 	}
 
 	// 	if( KeyEvent::isKeyDown(*key, *keys.K) ){
-	// 		_mouse.move_hv(0, step);
+	// 		_mouse.move_cc(0, step);
 	// 		return KeyEventResult::kAccepted;
 	// 	}
 
 	// 	if( KeyEvent::isKeyDown(*key, *keys.L) ){
-	// 		_mouse.move_hv(0, -1*step);
+	// 		_mouse.move_cc(0, -1*step);
 	// 		return KeyEventResult::kAccepted;
 	// 	}
 
 	// 	if( KeyEvent::isKeyDown(*key, *keys.Semicolon) ){
-	// 		_mouse.move_hv(step, 0);
+	// 		_mouse.move_cc(step, 0);
 	// 		return KeyEventResult::kAccepted;
 	// 	}
 	// 	return KeyEventResult::kNoop;
