@@ -36,6 +36,8 @@ protected:
 	Keys keys = Keys::inst();
 	an<Status> _status = mkuq<Status>();
 	void _updStatus(::MouseMode::Kt key);
+	/** 按住 即 連續移 */
+	KeyEventResult _normalMove_cc(i32 x, i32 y);
 public:
 
 	MouseMode(){

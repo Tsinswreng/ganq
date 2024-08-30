@@ -11,8 +11,8 @@ class MouseModeOpt {
 
 protected:
 	Keys& keys = Keys::inst();
-	i32 _mouseStep = 50;
-	i32 _mouseStep_slow = 10;
+	i32 _mouseStep = 15;
+	i32 _mouseStep_slow = 5;
 	i32 _mouseStep_fast = 200;
 	i32 _mouseStep_faster = 800;
 public:

@@ -75,7 +75,7 @@ protected:
 	bool _isAltDown = false;
 	bool _isMetaDown = false;
 	bool _isMouseMode = false;
-	i32 _mouseStep_normal = 50;
+	i32 _mouseStep_normal = 1;
 
 	i32 _mouseStep_fast = 200;
 

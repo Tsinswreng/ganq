@@ -33,6 +33,34 @@ void MouseMode::_updStatus(::MouseMode::Kt key){
 
 }
 
+//TODO 每次按鍵都會開一個新的線程
+KeyEventResult MouseMode::_normalMove_cc(i32 x, i32 y){
+	if(_curKey->state_() == KeyState::down){
+		std::thread([this, x, y](){
+			auto initCnt = status_()->cnt;
+			for(i32 i = 0;;i++){
+				_mouse.move_cc(
+					x,y
+				);
+
+				if(
+					status_()->cnt != initCnt
+					&& !status_()->duplicateEvent_()
+				){
+					break;
+				}
+				std::this_thread::sleep_for(
+					std::chrono::milliseconds(50)
+				);
+			}
+			
+		}).detach();
+	}else{
+		
+	}
+	return KeyEventResult::kAccepted;
+}
+
 void MouseMode::_init_keyCode__fn(){
 		//左鍵
 		auto& M = keyCode__fn;
@@ -57,78 +85,32 @@ void MouseMode::_init_keyCode__fn(){
 
 
 		// 試 持續左移 //TODO 用線程池 否則每次按鍵都會開一個新的線程
-		M[keys.H->code_()] = [this]()->Opt<KeyEventResult>{
-			if(_curKey->state_() == KeyState::down){
-				std::thread([this](){
-					auto initCnt = status_()->cnt;
-					for(i32 i = 0;;i++){
-						_mouse.move_cc(
-							-1 * 5, 0
-						);
-
-						if(
-							status_()->cnt != initCnt
-							&& !status_()->duplicateEvent_()
-						){
-							break;
-						}
-						std::this_thread::sleep_for(
-							std::chrono::milliseconds(50)
-						);
-					}
-					
-				}).detach();
-			}else{
-				
-			}
-			return KeyEventResult::kAccepted;
-		};
+		// M[keys.H->code_()] = [this]()->Opt<KeyEventResult>{
+		// 	return _normalMove_cc(-1 * _status->mouseStep_normal_(), 0);
+		// };
 
 		// 左移
 		M[keys.J->code_()] = [this]()->Opt<KeyEventResult>{
-			if(_curKey->state_() == KeyState::down){
-				_mouse.move_cc(
-					-1 * _status->mouseStep_normal_(), 0
-				);
-			}else{
-				
-			}
-			return KeyEventResult::kAccepted;
+			return _normalMove_cc(-1 * _status->mouseStep_normal_(), 0);
 		};
 		// 右移
 		M[keys.Semicolon->code_()] = [this]()->Opt<KeyEventResult>{
-			if(_curKey->state_() == KeyState::down){
-				_mouse.move_cc(
-					_status->mouseStep_normal_(), 0
-				);
-			}else{
-				
-			}
-			return KeyEventResult::kAccepted;
+			return _normalMove_cc(1 * _status->mouseStep_normal_(), 0);
 		};
 
 		// 下移
 		M[keys.K->code_()] = [this]()->Opt<KeyEventResult>{
-			if(_curKey->state_() == KeyState::down){
-				_mouse.move_cc(
-					0, _status->mouseStep_normal_() * -1
-				);
-			}else{
-				
-			}
-			return KeyEventResult::kAccepted;
+			return _normalMove_cc(
+				0, _status->mouseStep_normal_() * -1
+			);
+			
 		};
 
 		// 上移
 		M[keys.L->code_()] = [this]()->Opt<KeyEventResult>{
-			if(_curKey->state_() == KeyState::down){
-				_mouse.move_cc(
-					0, _status->mouseStep_normal_()
-				);
-			}else{
-				
-			}
-			return KeyEventResult::kAccepted;
+			return _normalMove_cc(
+				0, _status->mouseStep_normal_()
+			);
 		};
 		// ---- 快速
 
