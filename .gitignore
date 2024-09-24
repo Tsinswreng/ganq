@@ -3,3 +3,8 @@ cc/build
 cc/.cache
 cc/vcpkg_installed
 cc/cmake-build-debug
+cs/main/obj
+cs/main/bin
+
+cs/test/obj
+cs/test/bin
